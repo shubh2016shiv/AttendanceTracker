@@ -11,14 +11,12 @@ namespace AttendanceTracker
     public partial class DashBoard : MetroFramework.Forms.MetroForm
     {
         VideoCapture _capture;
-        Image qrCodeDefaultImage;
         public static string studentRollNumber;
         public DashBoard()
         {
             InitializeComponent();
             this.DetailPanel.Visible = true;
             this.EnrollStudentPanel.Visible = false;
-            qrCodeDefaultImage = QRCodePictureBox.BackgroundImage;
             if (!File.Exists(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes"))
             {
                 System.IO.Directory.CreateDirectory(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes");
@@ -72,32 +70,10 @@ namespace AttendanceTracker
             
         }
 
-        private void StartWebcamCircularButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.Idle += Streaming;
-                Console.WriteLine("Webcam started");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-          
-        }
-
-        
-
-        private void CapturePhotoCircularButton_Click(object sender, EventArgs e)
-        {
-            
-            
-        }
-
         private void Cancel_Click(object sender, EventArgs e)
         {
             this.EnrollStudentPanel.Visible = false;
-            this.DetailPanel.Visible = true;
+            Application.Idle -= Streaming;
             _capture = null;
         }
 
@@ -105,18 +81,18 @@ namespace AttendanceTracker
         {
             try
             {
-                PhotoPictureBox.BackgroundImageLayout = ImageLayout.Tile;
+                WebcamViewer.BackgroundImageLayout = ImageLayout.Tile;
                 var img = _capture.QueryFrame().ToImage<Emgu.CV.Structure.Bgr, byte>();
                 
                 var bmp = img.ToBitmap();
-                PhotoPictureBox.Image = bmp;
+                WebcamViewer.Image = bmp;
 
             }
             catch (Exception ex)
             {
                 if(ex is NullReferenceException)
                 {
-                    this.Close();
+                    
                     Console.WriteLine("Video Streaming interrupted due to :" + ex.Message);
                     MetroMessageBox.Show(this,"Error","",MessageBoxButtons.OK,MessageBoxIcon.Error);
                     
@@ -129,10 +105,42 @@ namespace AttendanceTracker
 
         private void DownloadQRCode_Click(object sender, EventArgs e)
         {
-           
-        QRCodePictureBox.Image.Save(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes\\" + studentRollNumber + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            try
+            {
+                QRCodePictureBox.BackgroundImage.Save(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes\\" + studentRollNumber + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                MetroMessageBox.Show(this, "Successfully saved", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this,"Error in saving QR code due to: " + ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }   
+        
             
         }
-        
+
+        private void CameraOnOff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CameraOnOff.Checked == true)
+            {
+                panelOverWebcam.Visible = false;
+                Application.Idle += Streaming;
+                Console.WriteLine("Webcam started");
+            }
+            else if(CameraOnOff.Checked == false)
+            {
+                panelOverWebcam.Visible = true;
+                Application.Idle -= Streaming;
+                Console.WriteLine("Webcam stopped");
+            }
+        }
+
+        private void CapturePhoto_Click(object sender, EventArgs e)
+        {
+            Image image = WebcamViewer.Image;
+            Application.Idle -= Streaming;
+            panelOverWebcam.Visible = true;
+            CapturedPhoto.Image = image;
+            CameraOnOff.Checked = false;
+        }
     }
 }

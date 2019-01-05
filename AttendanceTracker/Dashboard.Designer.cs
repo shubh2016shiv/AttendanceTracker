@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashBoard));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.Payments = new MetroFramework.Controls.MetroTile();
             this.DownloadRecords = new MetroFramework.Controls.MetroTile();
@@ -41,10 +41,11 @@
             this.EnrollStudent = new MetroFramework.Controls.MetroTile();
             this.DetailPanel = new MetroFramework.Controls.MetroPanel();
             this.EnrollStudentPanel = new MetroFramework.Controls.MetroPanel();
+            this.QRCodePictureBox = new System.Windows.Forms.PictureBox();
             this.CapturePhoto = new System.Windows.Forms.Button();
             this.DownloadQRCode = new MetroFramework.Controls.MetroButton();
-            this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
-            this.PhotoPictureBox = new System.Windows.Forms.PictureBox();
+            this.CameraOnOff = new MetroFramework.Controls.MetroToggle();
+            this.WebcamViewer = new System.Windows.Forms.PictureBox();
             this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.SaveEnrollInfo = new MetroFramework.Controls.MetroTile();
@@ -76,13 +77,16 @@
             this.SearchStudentTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.QRCodePictureBox = new System.Windows.Forms.PictureBox();
+            this.panelOverWebcam = new MetroFramework.Controls.MetroPanel();
+            this.CapturedPhoto = new System.Windows.Forms.PictureBox();
             this.metroPanel1.SuspendLayout();
             this.DetailPanel.SuspendLayout();
             this.EnrollStudentPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PhotoPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRCodePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WebcamViewer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
+            this.panelOverWebcam.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // metroPanel1
@@ -194,11 +198,12 @@
             // 
             // EnrollStudentPanel
             // 
+            this.EnrollStudentPanel.Controls.Add(this.panelOverWebcam);
             this.EnrollStudentPanel.Controls.Add(this.QRCodePictureBox);
             this.EnrollStudentPanel.Controls.Add(this.CapturePhoto);
             this.EnrollStudentPanel.Controls.Add(this.DownloadQRCode);
-            this.EnrollStudentPanel.Controls.Add(this.metroToggle1);
-            this.EnrollStudentPanel.Controls.Add(this.PhotoPictureBox);
+            this.EnrollStudentPanel.Controls.Add(this.CameraOnOff);
+            this.EnrollStudentPanel.Controls.Add(this.WebcamViewer);
             this.EnrollStudentPanel.Controls.Add(this.metroLabel12);
             this.EnrollStudentPanel.Controls.Add(this.metroLabel11);
             this.EnrollStudentPanel.Controls.Add(this.SaveEnrollInfo);
@@ -231,6 +236,16 @@
             this.EnrollStudentPanel.VerticalScrollbarHighlightOnWheel = false;
             this.EnrollStudentPanel.VerticalScrollbarSize = 10;
             // 
+            // QRCodePictureBox
+            // 
+            this.QRCodePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.QRCodePictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.QRCodePictureBox.Location = new System.Drawing.Point(681, 282);
+            this.QRCodePictureBox.Name = "QRCodePictureBox";
+            this.QRCodePictureBox.Size = new System.Drawing.Size(238, 191);
+            this.QRCodePictureBox.TabIndex = 31;
+            this.QRCodePictureBox.TabStop = false;
+            // 
             // CapturePhoto
             // 
             this.CapturePhoto.BackColor = System.Drawing.Color.Transparent;
@@ -242,6 +257,7 @@
             this.CapturePhoto.Size = new System.Drawing.Size(75, 57);
             this.CapturePhoto.TabIndex = 30;
             this.CapturePhoto.UseVisualStyleBackColor = false;
+            this.CapturePhoto.Click += new System.EventHandler(this.CapturePhoto_Click);
             // 
             // DownloadQRCode
             // 
@@ -253,23 +269,25 @@
             this.DownloadQRCode.UseSelectable = true;
             this.DownloadQRCode.Click += new System.EventHandler(this.DownloadQRCode_Click);
             // 
-            // metroToggle1
+            // CameraOnOff
             // 
-            this.metroToggle1.AutoSize = true;
-            this.metroToggle1.Location = new System.Drawing.Point(566, 83);
-            this.metroToggle1.Name = "metroToggle1";
-            this.metroToggle1.Size = new System.Drawing.Size(80, 21);
-            this.metroToggle1.TabIndex = 28;
-            this.metroToggle1.Text = "Off";
-            this.metroToggle1.UseSelectable = true;
+            this.CameraOnOff.AutoSize = true;
+            this.CameraOnOff.Location = new System.Drawing.Point(566, 83);
+            this.CameraOnOff.Name = "CameraOnOff";
+            this.CameraOnOff.Size = new System.Drawing.Size(80, 21);
+            this.CameraOnOff.TabIndex = 28;
+            this.CameraOnOff.Text = "Off";
+            this.CameraOnOff.UseSelectable = true;
+            this.CameraOnOff.CheckedChanged += new System.EventHandler(this.CameraOnOff_CheckedChanged);
             // 
-            // PhotoPictureBox
+            // WebcamViewer
             // 
-            this.PhotoPictureBox.Location = new System.Drawing.Point(681, 43);
-            this.PhotoPictureBox.Name = "PhotoPictureBox";
-            this.PhotoPictureBox.Size = new System.Drawing.Size(266, 218);
-            this.PhotoPictureBox.TabIndex = 27;
-            this.PhotoPictureBox.TabStop = false;
+            this.WebcamViewer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.WebcamViewer.Location = new System.Drawing.Point(681, 43);
+            this.WebcamViewer.Name = "WebcamViewer";
+            this.WebcamViewer.Size = new System.Drawing.Size(238, 218);
+            this.WebcamViewer.TabIndex = 27;
+            this.WebcamViewer.TabStop = false;
             // 
             // metroLabel12
             // 
@@ -614,14 +632,14 @@
             this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.metroGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NameOfStudent,
@@ -629,28 +647,28 @@
             this.CourseAssigned,
             this.TeacherAssigned,
             this.PhoneNumber});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle2;
             this.metroGrid1.EnableHeadersVisualStyles = false;
             this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGrid1.Location = new System.Drawing.Point(23, 98);
             this.metroGrid1.Name = "metroGrid1";
             this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid1.RowTemplate.Height = 24;
             this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -752,15 +770,28 @@
             this.metroLabel1.Size = new System.Drawing.Size(1, 613);
             this.metroLabel1.TabIndex = 2;
             // 
-            // QRCodePictureBox
+            // panelOverWebcam
             // 
-            this.QRCodePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.QRCodePictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.QRCodePictureBox.Location = new System.Drawing.Point(681, 292);
-            this.QRCodePictureBox.Name = "QRCodePictureBox";
-            this.QRCodePictureBox.Size = new System.Drawing.Size(266, 191);
-            this.QRCodePictureBox.TabIndex = 31;
-            this.QRCodePictureBox.TabStop = false;
+            this.panelOverWebcam.Controls.Add(this.CapturedPhoto);
+            this.panelOverWebcam.HorizontalScrollbarBarColor = true;
+            this.panelOverWebcam.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelOverWebcam.HorizontalScrollbarSize = 10;
+            this.panelOverWebcam.Location = new System.Drawing.Point(681, 43);
+            this.panelOverWebcam.Name = "panelOverWebcam";
+            this.panelOverWebcam.Size = new System.Drawing.Size(238, 218);
+            this.panelOverWebcam.TabIndex = 32;
+            this.panelOverWebcam.VerticalScrollbarBarColor = true;
+            this.panelOverWebcam.VerticalScrollbarHighlightOnWheel = false;
+            this.panelOverWebcam.VerticalScrollbarSize = 10;
+            // 
+            // CapturedPhoto
+            // 
+            this.CapturedPhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CapturedPhoto.Location = new System.Drawing.Point(0, 0);
+            this.CapturedPhoto.Name = "CapturedPhoto";
+            this.CapturedPhoto.Size = new System.Drawing.Size(238, 218);
+            this.CapturedPhoto.TabIndex = 2;
+            this.CapturedPhoto.TabStop = false;
             // 
             // DashBoard
             // 
@@ -781,9 +812,11 @@
             this.DetailPanel.PerformLayout();
             this.EnrollStudentPanel.ResumeLayout(false);
             this.EnrollStudentPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PhotoPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRCodePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WebcamViewer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
+            this.panelOverWebcam.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -832,9 +865,11 @@
         private MetroFramework.Controls.MetroLabel metroLabel11;
         private System.Windows.Forms.Button CapturePhoto;
         private MetroFramework.Controls.MetroButton DownloadQRCode;
-        private MetroFramework.Controls.MetroToggle metroToggle1;
-        private System.Windows.Forms.PictureBox PhotoPictureBox;
+        private MetroFramework.Controls.MetroToggle CameraOnOff;
+        private System.Windows.Forms.PictureBox WebcamViewer;
         private System.Windows.Forms.PictureBox QRCodePictureBox;
+        private MetroFramework.Controls.MetroPanel panelOverWebcam;
+        private System.Windows.Forms.PictureBox CapturedPhoto;
     }
 }
 
