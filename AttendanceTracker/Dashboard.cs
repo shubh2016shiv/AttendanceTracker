@@ -132,22 +132,7 @@ namespace AttendanceTracker
 
 
         }
-
-        private void DownloadQRCode_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                QRCodePictureBox.BackgroundImage.Save(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes\\" + studentRollNumber + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                MetroMessageBox.Show(this, "Successfully saved", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MetroMessageBox.Show(this,"Error in saving QR code due to: " + ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }   
         
-            
-        }
-
         private void CameraOnOff_CheckedChanged(object sender, EventArgs e)
         {
             if (CameraOnOff.Checked == true)
@@ -234,6 +219,20 @@ namespace AttendanceTracker
         {
             messageBoxOpenFolder = new OpenFolders();
             messageBoxOpenFolder.ShowDialog();
+        }
+
+        private void DownloadQRCode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                QRCodePictureBox.BackgroundImage.Save(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes\\" + studentRollNumber + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                MetroMessageBox.Show(this, "Successfully saved", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Error in saving QR code due to: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

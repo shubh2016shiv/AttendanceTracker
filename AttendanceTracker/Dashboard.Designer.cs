@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashBoard));
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.Payments = new MetroFramework.Controls.MetroTile();
@@ -46,7 +46,6 @@
             this.CapturedPhoto = new System.Windows.Forms.PictureBox();
             this.QRCodePictureBox = new System.Windows.Forms.PictureBox();
             this.CapturePhoto = new System.Windows.Forms.Button();
-            this.DownloadQRCode = new MetroFramework.Controls.MetroButton();
             this.CameraOnOff = new MetroFramework.Controls.MetroToggle();
             this.WebcamViewer = new System.Windows.Forms.PictureBox();
             this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
@@ -81,6 +80,7 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.OpenAllFoldersButton = new System.Windows.Forms.Button();
+            this.DownloadQRCode = new System.Windows.Forms.Button();
             this.metroPanel1.SuspendLayout();
             this.DetailPanel.SuspendLayout();
             this.EnrollStudentPanel.SuspendLayout();
@@ -201,11 +201,11 @@
             // 
             // EnrollStudentPanel
             // 
+            this.EnrollStudentPanel.Controls.Add(this.DownloadQRCode);
             this.EnrollStudentPanel.Controls.Add(this.SavePhoto);
             this.EnrollStudentPanel.Controls.Add(this.panelOverWebcam);
             this.EnrollStudentPanel.Controls.Add(this.QRCodePictureBox);
             this.EnrollStudentPanel.Controls.Add(this.CapturePhoto);
-            this.EnrollStudentPanel.Controls.Add(this.DownloadQRCode);
             this.EnrollStudentPanel.Controls.Add(this.CameraOnOff);
             this.EnrollStudentPanel.Controls.Add(this.WebcamViewer);
             this.EnrollStudentPanel.Controls.Add(this.metroLabel12);
@@ -298,16 +298,6 @@
             this.CapturePhoto.TabIndex = 30;
             this.CapturePhoto.UseVisualStyleBackColor = false;
             this.CapturePhoto.Click += new System.EventHandler(this.CapturePhoto_Click);
-            // 
-            // DownloadQRCode
-            // 
-            this.DownloadQRCode.Location = new System.Drawing.Point(930, 450);
-            this.DownloadQRCode.Name = "DownloadQRCode";
-            this.DownloadQRCode.Size = new System.Drawing.Size(75, 23);
-            this.DownloadQRCode.TabIndex = 29;
-            this.DownloadQRCode.Text = "SAVE QR";
-            this.DownloadQRCode.UseSelectable = true;
-            this.DownloadQRCode.Click += new System.EventHandler(this.DownloadQRCode_Click);
             // 
             // CameraOnOff
             // 
@@ -673,14 +663,14 @@
             this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.metroGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NameOfStudent,
@@ -688,28 +678,28 @@
             this.CourseAssigned,
             this.TeacherAssigned,
             this.PhoneNumber});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle5;
             this.metroGrid1.EnableHeadersVisualStyles = false;
             this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGrid1.Location = new System.Drawing.Point(23, 98);
             this.metroGrid1.Name = "metroGrid1";
             this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid1.RowTemplate.Height = 24;
             this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -824,6 +814,19 @@
             this.OpenAllFoldersButton.UseVisualStyleBackColor = false;
             this.OpenAllFoldersButton.Click += new System.EventHandler(this.OpenAllFoldersButton_Click);
             // 
+            // DownloadQRCode
+            // 
+            this.DownloadQRCode.BackColor = System.Drawing.Color.Transparent;
+            this.DownloadQRCode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DownloadQRCode.BackgroundImage")));
+            this.DownloadQRCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DownloadQRCode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.DownloadQRCode.Location = new System.Drawing.Point(930, 282);
+            this.DownloadQRCode.Name = "DownloadQRCode";
+            this.DownloadQRCode.Size = new System.Drawing.Size(54, 51);
+            this.DownloadQRCode.TabIndex = 34;
+            this.DownloadQRCode.UseVisualStyleBackColor = false;
+            this.DownloadQRCode.Click += new System.EventHandler(this.DownloadQRCode_Click);
+            // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -895,7 +898,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel12;
         private MetroFramework.Controls.MetroLabel metroLabel11;
         private System.Windows.Forms.Button CapturePhoto;
-        private MetroFramework.Controls.MetroButton DownloadQRCode;
         private MetroFramework.Controls.MetroToggle CameraOnOff;
         private System.Windows.Forms.PictureBox WebcamViewer;
         private System.Windows.Forms.PictureBox QRCodePictureBox;
@@ -903,6 +905,7 @@
         private System.Windows.Forms.PictureBox CapturedPhoto;
         private System.Windows.Forms.Button SavePhoto;
         private System.Windows.Forms.Button OpenAllFoldersButton;
+        private System.Windows.Forms.Button DownloadQRCode;
     }
 }
 
