@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashBoard));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.Refresh = new System.Windows.Forms.Button();
+            this.HomeButton = new System.Windows.Forms.Button();
+            this.OpenAllFoldersButton = new System.Windows.Forms.Button();
             this.Payments = new MetroFramework.Controls.MetroTile();
             this.DownloadRecords = new MetroFramework.Controls.MetroTile();
             this.Contact = new MetroFramework.Controls.MetroTile();
@@ -40,7 +43,17 @@
             this.CourseDirectory = new MetroFramework.Controls.MetroTile();
             this.EnrollStudent = new MetroFramework.Controls.MetroTile();
             this.DetailPanel = new MetroFramework.Controls.MetroPanel();
+            this.recordsGrid = new MetroFramework.Controls.MetroGrid();
+            this.NameOfStudent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RollNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CourseAssigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TeacherAssigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Close = new MetroFramework.Controls.MetroTile();
+            this.SearchStudentTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.EnrollStudentPanel = new MetroFramework.Controls.MetroPanel();
+            this.DownloadQRCode = new System.Windows.Forms.Button();
             this.SavePhoto = new System.Windows.Forms.Button();
             this.panelOverWebcam = new MetroFramework.Controls.MetroPanel();
             this.CapturedPhoto = new System.Windows.Forms.PictureBox();
@@ -69,30 +82,21 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
-            this.NameOfStudent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RollNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CourseAssigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TeacherAssigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Close = new MetroFramework.Controls.MetroTile();
-            this.SearchStudentTextBox = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.OpenAllFoldersButton = new System.Windows.Forms.Button();
-            this.DownloadQRCode = new System.Windows.Forms.Button();
             this.metroPanel1.SuspendLayout();
             this.DetailPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recordsGrid)).BeginInit();
             this.EnrollStudentPanel.SuspendLayout();
             this.panelOverWebcam.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRCodePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamViewer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.Refresh);
+            this.metroPanel1.Controls.Add(this.HomeButton);
             this.metroPanel1.Controls.Add(this.OpenAllFoldersButton);
             this.metroPanel1.Controls.Add(this.Payments);
             this.metroPanel1.Controls.Add(this.DownloadRecords);
@@ -113,6 +117,45 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // Refresh
+            // 
+            this.Refresh.BackColor = System.Drawing.Color.Transparent;
+            this.Refresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Refresh.BackgroundImage")));
+            this.Refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Refresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Refresh.Location = new System.Drawing.Point(137, 26);
+            this.Refresh.Name = "Refresh";
+            this.Refresh.Size = new System.Drawing.Size(56, 44);
+            this.Refresh.TabIndex = 9;
+            this.Refresh.UseVisualStyleBackColor = false;
+            this.Refresh.Click += new System.EventHandler(this.Refresh_Click);
+            // 
+            // HomeButton
+            // 
+            this.HomeButton.BackColor = System.Drawing.Color.Transparent;
+            this.HomeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HomeButton.BackgroundImage")));
+            this.HomeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.HomeButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.HomeButton.Location = new System.Drawing.Point(3, 26);
+            this.HomeButton.Name = "HomeButton";
+            this.HomeButton.Size = new System.Drawing.Size(66, 44);
+            this.HomeButton.TabIndex = 8;
+            this.HomeButton.UseVisualStyleBackColor = false;
+            this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
+            // 
+            // OpenAllFoldersButton
+            // 
+            this.OpenAllFoldersButton.BackColor = System.Drawing.Color.Transparent;
+            this.OpenAllFoldersButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OpenAllFoldersButton.BackgroundImage")));
+            this.OpenAllFoldersButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.OpenAllFoldersButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.OpenAllFoldersButton.Location = new System.Drawing.Point(75, 26);
+            this.OpenAllFoldersButton.Name = "OpenAllFoldersButton";
+            this.OpenAllFoldersButton.Size = new System.Drawing.Size(56, 44);
+            this.OpenAllFoldersButton.TabIndex = 7;
+            this.OpenAllFoldersButton.UseVisualStyleBackColor = false;
+            this.OpenAllFoldersButton.Click += new System.EventHandler(this.OpenAllFoldersButton_Click);
             // 
             // Payments
             // 
@@ -183,7 +226,7 @@
             // DetailPanel
             // 
             this.DetailPanel.Controls.Add(this.EnrollStudentPanel);
-            this.DetailPanel.Controls.Add(this.metroGrid1);
+            this.DetailPanel.Controls.Add(this.recordsGrid);
             this.DetailPanel.Controls.Add(this.Close);
             this.DetailPanel.Controls.Add(this.SearchStudentTextBox);
             this.DetailPanel.Controls.Add(this.metroLabel2);
@@ -192,12 +235,151 @@
             this.DetailPanel.HorizontalScrollbarSize = 10;
             this.DetailPanel.Location = new System.Drawing.Point(417, 63);
             this.DetailPanel.Name = "DetailPanel";
-            this.DetailPanel.Size = new System.Drawing.Size(1196, 611);
+            this.DetailPanel.Size = new System.Drawing.Size(1113, 613);
             this.DetailPanel.Style = MetroFramework.MetroColorStyle.Green;
             this.DetailPanel.TabIndex = 1;
             this.DetailPanel.VerticalScrollbarBarColor = true;
             this.DetailPanel.VerticalScrollbarHighlightOnWheel = false;
             this.DetailPanel.VerticalScrollbarSize = 10;
+            // 
+            // recordsGrid
+            // 
+            this.recordsGrid.AllowUserToResizeRows = false;
+            this.recordsGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.recordsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.recordsGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.recordsGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(73)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.recordsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.recordsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.recordsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NameOfStudent,
+            this.RollNumber,
+            this.CourseAssigned,
+            this.TeacherAssigned,
+            this.PhoneNumber});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(73)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.recordsGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            this.recordsGrid.EnableHeadersVisualStyles = false;
+            this.recordsGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.recordsGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.recordsGrid.Location = new System.Drawing.Point(23, 98);
+            this.recordsGrid.Name = "recordsGrid";
+            this.recordsGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(73)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.recordsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.recordsGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.recordsGrid.RowTemplate.Height = 24;
+            this.recordsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.recordsGrid.Size = new System.Drawing.Size(1009, 354);
+            this.recordsGrid.Style = MetroFramework.MetroColorStyle.Purple;
+            this.recordsGrid.TabIndex = 5;
+            this.recordsGrid.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // NameOfStudent
+            // 
+            this.NameOfStudent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameOfStudent.HeaderText = "Name Of Student";
+            this.NameOfStudent.Name = "NameOfStudent";
+            this.NameOfStudent.ReadOnly = true;
+            // 
+            // RollNumber
+            // 
+            this.RollNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.RollNumber.HeaderText = "Roll Number";
+            this.RollNumber.Name = "RollNumber";
+            this.RollNumber.ReadOnly = true;
+            // 
+            // CourseAssigned
+            // 
+            this.CourseAssigned.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CourseAssigned.HeaderText = "Course Assigned";
+            this.CourseAssigned.Name = "CourseAssigned";
+            this.CourseAssigned.ReadOnly = true;
+            // 
+            // TeacherAssigned
+            // 
+            this.TeacherAssigned.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TeacherAssigned.HeaderText = "Teacher Assigned";
+            this.TeacherAssigned.Name = "TeacherAssigned";
+            this.TeacherAssigned.ReadOnly = true;
+            // 
+            // PhoneNumber
+            // 
+            this.PhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PhoneNumber.HeaderText = "Phone Number";
+            this.PhoneNumber.Name = "PhoneNumber";
+            this.PhoneNumber.ReadOnly = true;
+            // 
+            // Close
+            // 
+            this.Close.ActiveControl = null;
+            this.Close.Location = new System.Drawing.Point(895, 540);
+            this.Close.Name = "Close";
+            this.Close.Size = new System.Drawing.Size(137, 51);
+            this.Close.Style = MetroFramework.MetroColorStyle.Red;
+            this.Close.TabIndex = 4;
+            this.Close.Text = "Close";
+            this.Close.UseSelectable = true;
+            this.Close.Click += new System.EventHandler(this.Close_Click);
+            // 
+            // SearchStudentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.SearchStudentTextBox.CustomButton.Image = null;
+            this.SearchStudentTextBox.CustomButton.Location = new System.Drawing.Point(450, 1);
+            this.SearchStudentTextBox.CustomButton.Name = "";
+            this.SearchStudentTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.SearchStudentTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.SearchStudentTextBox.CustomButton.TabIndex = 1;
+            this.SearchStudentTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.SearchStudentTextBox.CustomButton.UseSelectable = true;
+            this.SearchStudentTextBox.CustomButton.Visible = false;
+            this.SearchStudentTextBox.Lines = new string[0];
+            this.SearchStudentTextBox.Location = new System.Drawing.Point(560, 47);
+            this.SearchStudentTextBox.MaxLength = 32767;
+            this.SearchStudentTextBox.Name = "SearchStudentTextBox";
+            this.SearchStudentTextBox.PasswordChar = '\0';
+            this.SearchStudentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.SearchStudentTextBox.SelectedText = "";
+            this.SearchStudentTextBox.SelectionLength = 0;
+            this.SearchStudentTextBox.SelectionStart = 0;
+            this.SearchStudentTextBox.ShortcutsEnabled = true;
+            this.SearchStudentTextBox.Size = new System.Drawing.Size(472, 23);
+            this.SearchStudentTextBox.TabIndex = 3;
+            this.SearchStudentTextBox.UseSelectable = true;
+            this.SearchStudentTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.SearchStudentTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.SearchStudentTextBox.TextChanged += new System.EventHandler(this.SearchStudentTextBox_TextChanged);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(100, 47);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(356, 20);
+            this.metroLabel2.TabIndex = 2;
+            this.metroLabel2.Text = "Search for student by First Name / Roll Number/ Course";
             // 
             // EnrollStudentPanel
             // 
@@ -234,11 +416,24 @@
             this.EnrollStudentPanel.HorizontalScrollbarSize = 10;
             this.EnrollStudentPanel.Location = new System.Drawing.Point(0, 0);
             this.EnrollStudentPanel.Name = "EnrollStudentPanel";
-            this.EnrollStudentPanel.Size = new System.Drawing.Size(1301, 613);
+            this.EnrollStudentPanel.Size = new System.Drawing.Size(1113, 613);
             this.EnrollStudentPanel.TabIndex = 6;
             this.EnrollStudentPanel.VerticalScrollbarBarColor = true;
             this.EnrollStudentPanel.VerticalScrollbarHighlightOnWheel = false;
             this.EnrollStudentPanel.VerticalScrollbarSize = 10;
+            // 
+            // DownloadQRCode
+            // 
+            this.DownloadQRCode.BackColor = System.Drawing.Color.Transparent;
+            this.DownloadQRCode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DownloadQRCode.BackgroundImage")));
+            this.DownloadQRCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DownloadQRCode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.DownloadQRCode.Location = new System.Drawing.Point(930, 282);
+            this.DownloadQRCode.Name = "DownloadQRCode";
+            this.DownloadQRCode.Size = new System.Drawing.Size(54, 51);
+            this.DownloadQRCode.TabIndex = 34;
+            this.DownloadQRCode.UseVisualStyleBackColor = false;
+            this.DownloadQRCode.Click += new System.EventHandler(this.DownloadQRCode_Click);
             // 
             // SavePhoto
             // 
@@ -656,142 +851,6 @@
             this.metroLabel3.TabIndex = 2;
             this.metroLabel3.Text = "First Name";
             // 
-            // metroGrid1
-            // 
-            this.metroGrid1.AllowUserToResizeRows = false;
-            this.metroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.metroGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NameOfStudent,
-            this.RollNumber,
-            this.CourseAssigned,
-            this.TeacherAssigned,
-            this.PhoneNumber});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.metroGrid1.EnableHeadersVisualStyles = false;
-            this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGrid1.Location = new System.Drawing.Point(23, 98);
-            this.metroGrid1.Name = "metroGrid1";
-            this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.metroGrid1.RowTemplate.Height = 24;
-            this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGrid1.Size = new System.Drawing.Size(1009, 354);
-            this.metroGrid1.TabIndex = 5;
-            // 
-            // NameOfStudent
-            // 
-            this.NameOfStudent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameOfStudent.HeaderText = "Name Of Student";
-            this.NameOfStudent.Name = "NameOfStudent";
-            this.NameOfStudent.ReadOnly = true;
-            // 
-            // RollNumber
-            // 
-            this.RollNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.RollNumber.HeaderText = "Roll Number";
-            this.RollNumber.Name = "RollNumber";
-            this.RollNumber.ReadOnly = true;
-            // 
-            // CourseAssigned
-            // 
-            this.CourseAssigned.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CourseAssigned.HeaderText = "Course(s) Assigned";
-            this.CourseAssigned.Name = "CourseAssigned";
-            this.CourseAssigned.ReadOnly = true;
-            // 
-            // TeacherAssigned
-            // 
-            this.TeacherAssigned.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TeacherAssigned.HeaderText = "Teacher(s) Assigned";
-            this.TeacherAssigned.Name = "TeacherAssigned";
-            this.TeacherAssigned.ReadOnly = true;
-            // 
-            // PhoneNumber
-            // 
-            this.PhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PhoneNumber.HeaderText = "Phone Number";
-            this.PhoneNumber.Name = "PhoneNumber";
-            this.PhoneNumber.ReadOnly = true;
-            // 
-            // Close
-            // 
-            this.Close.ActiveControl = null;
-            this.Close.Location = new System.Drawing.Point(895, 540);
-            this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(137, 51);
-            this.Close.Style = MetroFramework.MetroColorStyle.Red;
-            this.Close.TabIndex = 4;
-            this.Close.Text = "Close";
-            this.Close.UseSelectable = true;
-            this.Close.Click += new System.EventHandler(this.Close_Click);
-            // 
-            // SearchStudentTextBox
-            // 
-            // 
-            // 
-            // 
-            this.SearchStudentTextBox.CustomButton.Image = null;
-            this.SearchStudentTextBox.CustomButton.Location = new System.Drawing.Point(175, 1);
-            this.SearchStudentTextBox.CustomButton.Name = "";
-            this.SearchStudentTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.SearchStudentTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.SearchStudentTextBox.CustomButton.TabIndex = 1;
-            this.SearchStudentTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.SearchStudentTextBox.CustomButton.UseSelectable = true;
-            this.SearchStudentTextBox.CustomButton.Visible = false;
-            this.SearchStudentTextBox.Lines = new string[0];
-            this.SearchStudentTextBox.Location = new System.Drawing.Point(835, 47);
-            this.SearchStudentTextBox.MaxLength = 32767;
-            this.SearchStudentTextBox.Name = "SearchStudentTextBox";
-            this.SearchStudentTextBox.PasswordChar = '\0';
-            this.SearchStudentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.SearchStudentTextBox.SelectedText = "";
-            this.SearchStudentTextBox.SelectionLength = 0;
-            this.SearchStudentTextBox.SelectionStart = 0;
-            this.SearchStudentTextBox.ShortcutsEnabled = true;
-            this.SearchStudentTextBox.Size = new System.Drawing.Size(197, 23);
-            this.SearchStudentTextBox.TabIndex = 3;
-            this.SearchStudentTextBox.UseSelectable = true;
-            this.SearchStudentTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.SearchStudentTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(647, 50);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(126, 20);
-            this.metroLabel2.TabIndex = 2;
-            this.metroLabel2.Text = "Search For Student";
-            // 
             // metroLabel1
             // 
             this.metroLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -801,56 +860,31 @@
             this.metroLabel1.Size = new System.Drawing.Size(1, 613);
             this.metroLabel1.TabIndex = 2;
             // 
-            // OpenAllFoldersButton
-            // 
-            this.OpenAllFoldersButton.BackColor = System.Drawing.Color.Transparent;
-            this.OpenAllFoldersButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OpenAllFoldersButton.BackgroundImage")));
-            this.OpenAllFoldersButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.OpenAllFoldersButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.OpenAllFoldersButton.Location = new System.Drawing.Point(0, 20);
-            this.OpenAllFoldersButton.Name = "OpenAllFoldersButton";
-            this.OpenAllFoldersButton.Size = new System.Drawing.Size(56, 44);
-            this.OpenAllFoldersButton.TabIndex = 7;
-            this.OpenAllFoldersButton.UseVisualStyleBackColor = false;
-            this.OpenAllFoldersButton.Click += new System.EventHandler(this.OpenAllFoldersButton_Click);
-            // 
-            // DownloadQRCode
-            // 
-            this.DownloadQRCode.BackColor = System.Drawing.Color.Transparent;
-            this.DownloadQRCode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DownloadQRCode.BackgroundImage")));
-            this.DownloadQRCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.DownloadQRCode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.DownloadQRCode.Location = new System.Drawing.Point(930, 282);
-            this.DownloadQRCode.Name = "DownloadQRCode";
-            this.DownloadQRCode.Size = new System.Drawing.Size(54, 51);
-            this.DownloadQRCode.TabIndex = 34;
-            this.DownloadQRCode.UseVisualStyleBackColor = false;
-            this.DownloadQRCode.Click += new System.EventHandler(this.DownloadQRCode_Click);
-            // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1465, 697);
-            this.Controls.Add(this.metroLabel1);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1487, 699);
             this.Controls.Add(this.DetailPanel);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.Name = "DashBoard";
-            this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "Attendance Tracker";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.TransparencyKey = System.Drawing.Color.Empty;
             this.metroPanel1.ResumeLayout(false);
             this.DetailPanel.ResumeLayout(false);
             this.DetailPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recordsGrid)).EndInit();
             this.EnrollStudentPanel.ResumeLayout(false);
             this.EnrollStudentPanel.PerformLayout();
             this.panelOverWebcam.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRCodePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamViewer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -868,12 +902,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox SearchStudentTextBox;
         private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroGrid metroGrid1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameOfStudent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RollNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CourseAssigned;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TeacherAssigned;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneNumber;
+        private MetroFramework.Controls.MetroGrid recordsGrid;
         private new MetroFramework.Controls.MetroTile Close;
         private MetroFramework.Controls.MetroPanel EnrollStudentPanel;
         private MetroFramework.Controls.MetroButton GenerateRollNumber;
@@ -906,6 +935,13 @@
         private System.Windows.Forms.Button SavePhoto;
         private System.Windows.Forms.Button OpenAllFoldersButton;
         private System.Windows.Forms.Button DownloadQRCode;
+        private System.Windows.Forms.Button HomeButton;
+        private System.Windows.Forms.Button Refresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameOfStudent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RollNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CourseAssigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TeacherAssigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneNumber;
     }
 }
 

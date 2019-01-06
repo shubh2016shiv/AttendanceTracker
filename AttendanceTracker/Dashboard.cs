@@ -7,6 +7,7 @@ using MetroFramework;
 using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Data;
 
 namespace AttendanceTracker
 {
@@ -43,6 +44,7 @@ namespace AttendanceTracker
                 Console.WriteLine("Record file found in location: " + System.IO.Directory.GetCurrentDirectory() + "\\Saved Records");
                 Console.WriteLine("Start deserializing...");
                 List<EnrollInformationObject> savedEnrollInformationObjects = JSON_Deserialize_Serialize.DeSerialize(currentDirectory + "\\Records.json");
+                recordsGrid.DataSource = savedEnrollInformationObjects;
                 JSON_Deserialize_Serialize.EnrollInformationObjectsList.AddRange(savedEnrollInformationObjects);
 
             }
@@ -53,6 +55,7 @@ namespace AttendanceTracker
             }
             
         }
+
 
         private void Close_Click(object sender, EventArgs e)
         {
@@ -230,9 +233,59 @@ namespace AttendanceTracker
             }
             catch (Exception ex)
             {
-                MetroMessageBox.Show(this, "Error in saving QR code due to: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if(ex is NullReferenceException)
+                {
+                    MetroMessageBox.Show(this, "QR Code is not generated. Click on 'Genarate' button first.", "Error in saving QR Code", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Error in saving QR code due to: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
 
         }
+
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+            DetailPanel.Visible = true;
+            EnrollStudentPanel.Visible = false;
+        }
+
+        private void SearchStudentTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try{
+                (recordsGrid.DataSource as DataTable).DefaultView.RowFilter = string.Format("firstname LIKE '{0}'", SearchStudentTextBox.Text);
+            }
+            catch (Exception ex)
+            {
+                if(ex is NullReferenceException) MetroMessageBox.Show(this, "There are no records available", "No Record Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+        //Reseting the whole program and refresh the Data Grid
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            //Reseting Fields in 'Enroll Students'
+            FirstNameTextBox.Text = "";
+            LastNameTextBox.Text = "";
+            MiddleNameTextBox.Text = "";
+            CourseComboBox.Text = "";
+            RollNumberTextBox.Text = "";
+            AssignTeacherTextBox.Text = "";
+            PhoneNumberTextBox.Text = "";
+
+            //Resetting QR code picture box
+            QRCodePictureBox.BackgroundImage = null;
+            QRCodePictureBox.Image = null;
+            
+            //Stopping the streaming from webcam
+            Application.Idle -= Streaming;
+            
+            //resetting photo in Photo Booth
+            CapturedPhoto.Image = null;
+            CapturedPhoto.BackgroundImage = null;
+        }
+        
     }
 }
