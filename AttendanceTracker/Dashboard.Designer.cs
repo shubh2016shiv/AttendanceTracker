@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashBoard));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.Payments = new MetroFramework.Controls.MetroTile();
             this.DownloadRecords = new MetroFramework.Controls.MetroTile();
@@ -41,6 +41,9 @@
             this.EnrollStudent = new MetroFramework.Controls.MetroTile();
             this.DetailPanel = new MetroFramework.Controls.MetroPanel();
             this.EnrollStudentPanel = new MetroFramework.Controls.MetroPanel();
+            this.SavePhoto = new System.Windows.Forms.Button();
+            this.panelOverWebcam = new MetroFramework.Controls.MetroPanel();
+            this.CapturedPhoto = new System.Windows.Forms.PictureBox();
             this.QRCodePictureBox = new System.Windows.Forms.PictureBox();
             this.CapturePhoto = new System.Windows.Forms.Button();
             this.DownloadQRCode = new MetroFramework.Controls.MetroButton();
@@ -50,8 +53,8 @@
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.SaveEnrollInfo = new MetroFramework.Controls.MetroTile();
             this.Cancel = new MetroFramework.Controls.MetroTile();
-            this.courseComboBox = new System.Windows.Forms.ComboBox();
-            this.metroDateTime1 = new MetroFramework.Controls.MetroDateTime();
+            this.CourseComboBox = new System.Windows.Forms.ComboBox();
+            this.EnrollmentDateTime = new MetroFramework.Controls.MetroDateTime();
             this.GenerateRollNumber = new MetroFramework.Controls.MetroButton();
             this.PhoneNumberTextBox = new MetroFramework.Controls.MetroTextBox();
             this.AssignTeacherTextBox = new MetroFramework.Controls.MetroTextBox();
@@ -77,16 +80,14 @@
             this.SearchStudentTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.panelOverWebcam = new MetroFramework.Controls.MetroPanel();
-            this.CapturedPhoto = new System.Windows.Forms.PictureBox();
             this.metroPanel1.SuspendLayout();
             this.DetailPanel.SuspendLayout();
             this.EnrollStudentPanel.SuspendLayout();
+            this.panelOverWebcam.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRCodePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamViewer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
-            this.panelOverWebcam.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // metroPanel1
@@ -198,6 +199,7 @@
             // 
             // EnrollStudentPanel
             // 
+            this.EnrollStudentPanel.Controls.Add(this.SavePhoto);
             this.EnrollStudentPanel.Controls.Add(this.panelOverWebcam);
             this.EnrollStudentPanel.Controls.Add(this.QRCodePictureBox);
             this.EnrollStudentPanel.Controls.Add(this.CapturePhoto);
@@ -208,8 +210,8 @@
             this.EnrollStudentPanel.Controls.Add(this.metroLabel11);
             this.EnrollStudentPanel.Controls.Add(this.SaveEnrollInfo);
             this.EnrollStudentPanel.Controls.Add(this.Cancel);
-            this.EnrollStudentPanel.Controls.Add(this.courseComboBox);
-            this.EnrollStudentPanel.Controls.Add(this.metroDateTime1);
+            this.EnrollStudentPanel.Controls.Add(this.CourseComboBox);
+            this.EnrollStudentPanel.Controls.Add(this.EnrollmentDateTime);
             this.EnrollStudentPanel.Controls.Add(this.GenerateRollNumber);
             this.EnrollStudentPanel.Controls.Add(this.PhoneNumberTextBox);
             this.EnrollStudentPanel.Controls.Add(this.AssignTeacherTextBox);
@@ -230,11 +232,47 @@
             this.EnrollStudentPanel.HorizontalScrollbarSize = 10;
             this.EnrollStudentPanel.Location = new System.Drawing.Point(-1, 0);
             this.EnrollStudentPanel.Name = "EnrollStudentPanel";
-            this.EnrollStudentPanel.Size = new System.Drawing.Size(1197, 613);
+            this.EnrollStudentPanel.Size = new System.Drawing.Size(1301, 613);
             this.EnrollStudentPanel.TabIndex = 6;
             this.EnrollStudentPanel.VerticalScrollbarBarColor = true;
             this.EnrollStudentPanel.VerticalScrollbarHighlightOnWheel = false;
             this.EnrollStudentPanel.VerticalScrollbarSize = 10;
+            // 
+            // SavePhoto
+            // 
+            this.SavePhoto.BackColor = System.Drawing.Color.Transparent;
+            this.SavePhoto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SavePhoto.BackgroundImage")));
+            this.SavePhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SavePhoto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.SavePhoto.Location = new System.Drawing.Point(930, 134);
+            this.SavePhoto.Name = "SavePhoto";
+            this.SavePhoto.Size = new System.Drawing.Size(75, 59);
+            this.SavePhoto.TabIndex = 33;
+            this.SavePhoto.UseVisualStyleBackColor = false;
+            this.SavePhoto.Click += new System.EventHandler(this.SavePhoto_Click);
+            // 
+            // panelOverWebcam
+            // 
+            this.panelOverWebcam.Controls.Add(this.CapturedPhoto);
+            this.panelOverWebcam.HorizontalScrollbarBarColor = true;
+            this.panelOverWebcam.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelOverWebcam.HorizontalScrollbarSize = 10;
+            this.panelOverWebcam.Location = new System.Drawing.Point(681, 43);
+            this.panelOverWebcam.Name = "panelOverWebcam";
+            this.panelOverWebcam.Size = new System.Drawing.Size(238, 218);
+            this.panelOverWebcam.TabIndex = 32;
+            this.panelOverWebcam.VerticalScrollbarBarColor = true;
+            this.panelOverWebcam.VerticalScrollbarHighlightOnWheel = false;
+            this.panelOverWebcam.VerticalScrollbarSize = 10;
+            // 
+            // CapturedPhoto
+            // 
+            this.CapturedPhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CapturedPhoto.Location = new System.Drawing.Point(0, 0);
+            this.CapturedPhoto.Name = "CapturedPhoto";
+            this.CapturedPhoto.Size = new System.Drawing.Size(238, 218);
+            this.CapturedPhoto.TabIndex = 2;
+            this.CapturedPhoto.TabStop = false;
             // 
             // QRCodePictureBox
             // 
@@ -252,7 +290,7 @@
             this.CapturePhoto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CapturePhoto.BackgroundImage")));
             this.CapturePhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.CapturePhoto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.CapturePhoto.Location = new System.Drawing.Point(571, 128);
+            this.CapturePhoto.Location = new System.Drawing.Point(930, 70);
             this.CapturePhoto.Name = "CapturePhoto";
             this.CapturePhoto.Size = new System.Drawing.Size(75, 57);
             this.CapturePhoto.TabIndex = 30;
@@ -261,7 +299,7 @@
             // 
             // DownloadQRCode
             // 
-            this.DownloadQRCode.Location = new System.Drawing.Point(566, 333);
+            this.DownloadQRCode.Location = new System.Drawing.Point(930, 450);
             this.DownloadQRCode.Name = "DownloadQRCode";
             this.DownloadQRCode.Size = new System.Drawing.Size(75, 23);
             this.DownloadQRCode.TabIndex = 29;
@@ -272,7 +310,7 @@
             // CameraOnOff
             // 
             this.CameraOnOff.AutoSize = true;
-            this.CameraOnOff.Location = new System.Drawing.Point(566, 83);
+            this.CameraOnOff.Location = new System.Drawing.Point(925, 43);
             this.CameraOnOff.Name = "CameraOnOff";
             this.CameraOnOff.Size = new System.Drawing.Size(80, 21);
             this.CameraOnOff.TabIndex = 28;
@@ -294,7 +332,7 @@
             this.metroLabel12.AutoSize = true;
             this.metroLabel12.BackColor = System.Drawing.Color.Silver;
             this.metroLabel12.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel12.Location = new System.Drawing.Point(533, 292);
+            this.metroLabel12.Location = new System.Drawing.Point(518, 287);
             this.metroLabel12.Name = "metroLabel12";
             this.metroLabel12.Size = new System.Drawing.Size(86, 25);
             this.metroLabel12.Style = MetroFramework.MetroColorStyle.Orange;
@@ -308,7 +346,7 @@
             this.metroLabel11.AutoSize = true;
             this.metroLabel11.BackColor = System.Drawing.Color.Silver;
             this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel11.Location = new System.Drawing.Point(533, 43);
+            this.metroLabel11.Location = new System.Drawing.Point(518, 41);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(113, 25);
             this.metroLabel11.Style = MetroFramework.MetroColorStyle.Orange;
@@ -329,6 +367,7 @@
             this.SaveEnrollInfo.Text = "Save";
             this.SaveEnrollInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.SaveEnrollInfo.UseSelectable = true;
+            this.SaveEnrollInfo.Click += new System.EventHandler(this.SaveEnrollInfo_Click);
             // 
             // Cancel
             // 
@@ -343,22 +382,22 @@
             this.Cancel.UseSelectable = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // courseComboBox
+            // CourseComboBox
             // 
-            this.courseComboBox.FormattingEnabled = true;
-            this.courseComboBox.Location = new System.Drawing.Point(159, 351);
-            this.courseComboBox.Name = "courseComboBox";
-            this.courseComboBox.Size = new System.Drawing.Size(267, 24);
-            this.courseComboBox.TabIndex = 16;
-            this.courseComboBox.Text = "Enter the keyword to search..";
+            this.CourseComboBox.FormattingEnabled = true;
+            this.CourseComboBox.Location = new System.Drawing.Point(159, 351);
+            this.CourseComboBox.Name = "CourseComboBox";
+            this.CourseComboBox.Size = new System.Drawing.Size(267, 24);
+            this.CourseComboBox.TabIndex = 16;
+            this.CourseComboBox.Text = "Enter the keyword to search..";
             // 
-            // metroDateTime1
+            // EnrollmentDateTime
             // 
-            this.metroDateTime1.Location = new System.Drawing.Point(159, 282);
-            this.metroDateTime1.MinimumSize = new System.Drawing.Size(0, 30);
-            this.metroDateTime1.Name = "metroDateTime1";
-            this.metroDateTime1.Size = new System.Drawing.Size(267, 30);
-            this.metroDateTime1.TabIndex = 15;
+            this.EnrollmentDateTime.Location = new System.Drawing.Point(159, 282);
+            this.EnrollmentDateTime.MinimumSize = new System.Drawing.Size(0, 30);
+            this.EnrollmentDateTime.Name = "EnrollmentDateTime";
+            this.EnrollmentDateTime.Size = new System.Drawing.Size(267, 30);
+            this.EnrollmentDateTime.TabIndex = 15;
             // 
             // GenerateRollNumber
             // 
@@ -632,14 +671,14 @@
             this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.metroGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NameOfStudent,
@@ -647,28 +686,28 @@
             this.CourseAssigned,
             this.TeacherAssigned,
             this.PhoneNumber});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle5;
             this.metroGrid1.EnableHeadersVisualStyles = false;
             this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGrid1.Location = new System.Drawing.Point(23, 98);
             this.metroGrid1.Name = "metroGrid1";
             this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid1.RowTemplate.Height = 24;
             this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -770,34 +809,11 @@
             this.metroLabel1.Size = new System.Drawing.Size(1, 613);
             this.metroLabel1.TabIndex = 2;
             // 
-            // panelOverWebcam
-            // 
-            this.panelOverWebcam.Controls.Add(this.CapturedPhoto);
-            this.panelOverWebcam.HorizontalScrollbarBarColor = true;
-            this.panelOverWebcam.HorizontalScrollbarHighlightOnWheel = false;
-            this.panelOverWebcam.HorizontalScrollbarSize = 10;
-            this.panelOverWebcam.Location = new System.Drawing.Point(681, 43);
-            this.panelOverWebcam.Name = "panelOverWebcam";
-            this.panelOverWebcam.Size = new System.Drawing.Size(238, 218);
-            this.panelOverWebcam.TabIndex = 32;
-            this.panelOverWebcam.VerticalScrollbarBarColor = true;
-            this.panelOverWebcam.VerticalScrollbarHighlightOnWheel = false;
-            this.panelOverWebcam.VerticalScrollbarSize = 10;
-            // 
-            // CapturedPhoto
-            // 
-            this.CapturedPhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.CapturedPhoto.Location = new System.Drawing.Point(0, 0);
-            this.CapturedPhoto.Name = "CapturedPhoto";
-            this.CapturedPhoto.Size = new System.Drawing.Size(238, 218);
-            this.CapturedPhoto.TabIndex = 2;
-            this.CapturedPhoto.TabStop = false;
-            // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1636, 697);
+            this.ClientSize = new System.Drawing.Size(1465, 697);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.DetailPanel);
             this.Controls.Add(this.metroPanel1);
@@ -812,11 +828,11 @@
             this.DetailPanel.PerformLayout();
             this.EnrollStudentPanel.ResumeLayout(false);
             this.EnrollStudentPanel.PerformLayout();
+            this.panelOverWebcam.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRCodePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamViewer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
-            this.panelOverWebcam.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CapturedPhoto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -857,8 +873,8 @@
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroDateTime metroDateTime1;
-        private System.Windows.Forms.ComboBox courseComboBox;
+        private MetroFramework.Controls.MetroDateTime EnrollmentDateTime;
+        private System.Windows.Forms.ComboBox CourseComboBox;
         private MetroFramework.Controls.MetroTile SaveEnrollInfo;
         private MetroFramework.Controls.MetroTile Cancel;
         private MetroFramework.Controls.MetroLabel metroLabel12;
@@ -870,6 +886,7 @@
         private System.Windows.Forms.PictureBox QRCodePictureBox;
         private MetroFramework.Controls.MetroPanel panelOverWebcam;
         private System.Windows.Forms.PictureBox CapturedPhoto;
+        private System.Windows.Forms.Button SavePhoto;
     }
 }
 

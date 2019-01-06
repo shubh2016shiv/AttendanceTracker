@@ -11,7 +11,7 @@ namespace AttendanceTracker
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
-        public DateTime EnrollmentDate { get; set; }
+        public string EnrollmentDate { get; set; }
         public string AssignedCourse { get; set; }
         public string RollNumber { get; set; }
         public string AssignedTeacher { get; set; }
@@ -22,7 +22,7 @@ namespace AttendanceTracker
 
         }
 
-        public EnrollInformationObject(string firstName,string lastName, string middleName,DateTime enrollmentDate,string assignedCourse,string rollNumber,string assignedTeacher,string contactNumber)
+        public EnrollInformationObject(string firstName,string lastName, string middleName,string enrollmentDate,string assignedCourse,string rollNumber,string assignedTeacher,string contactNumber)
         {
             this.FirstName = firstName;
             this.LastName = lastName;

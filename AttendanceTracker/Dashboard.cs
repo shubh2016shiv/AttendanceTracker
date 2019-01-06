@@ -5,6 +5,8 @@ using Emgu.CV;
 using System.Windows.Forms;
 using MetroFramework;
 using System.IO;
+using System.Globalization;
+using System.Collections.Generic;
 
 namespace AttendanceTracker
 {
@@ -12,19 +14,47 @@ namespace AttendanceTracker
     {
         VideoCapture _capture;
         public static string studentRollNumber;
+        string name;
+        private EnrollInformationObject enrollInformationObject;
+        
         public DashBoard()
         {
             InitializeComponent();
+            
+            IntializeWithOtherConditions();
+            
+        }
+
+        private void IntializeWithOtherConditions()
+        {
             this.DetailPanel.Visible = true;
             this.EnrollStudentPanel.Visible = false;
             if (!File.Exists(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes"))
             {
-                System.IO.Directory.CreateDirectory(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes");
+                Directory.CreateDirectory(System.IO.Directory.GetCurrentDirectory() + "\\QR Codes");
+            }
+            if (!File.Exists(System.IO.Directory.GetCurrentDirectory() + "\\Photos"))
+            {
+                Directory.CreateDirectory(System.IO.Directory.GetCurrentDirectory() + "\\Photos");
+            }
+
+            string currentDirectory = System.IO.Directory.GetCurrentDirectory() + "\\Saved Records";
+            if (File.Exists(currentDirectory + "\\Records.json"))
+            {
+                Console.WriteLine("Record file found in location: " + System.IO.Directory.GetCurrentDirectory() + "\\Saved Records");
+                Console.WriteLine("Start deserializing...");
+                List<EnrollInformationObject> savedEnrollInformationObjects = JSON_Deserialize_Serialize.DeSerialize(currentDirectory + "\\Records.json");
+                JSON_Deserialize_Serialize.EnrollInformationObjectsList.AddRange(savedEnrollInformationObjects);
+
+            }
+            else
+            {
+                Directory.CreateDirectory(System.IO.Directory.GetCurrentDirectory() + "\\Saved Records");
+
             }
             
-                
         }
-        
+
         private void Close_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -40,7 +70,8 @@ namespace AttendanceTracker
         {
             try
             {
-                studentRollNumber = CreateRollNumber(this.FirstNameTextBox.Text, this.LastNameTextBox.Text, this.CourseAssigned.Name);
+                name = FirstNameTextBox.Text + " " + LastNameTextBox.Text;
+                studentRollNumber = CreateRollNumber(FirstNameTextBox.Text, LastNameTextBox.Text, CourseAssigned.Name);
                 QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
                 QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(studentRollNumber, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qRCodeData);
@@ -141,6 +172,58 @@ namespace AttendanceTracker
             panelOverWebcam.Visible = true;
             CapturedPhoto.Image = image;
             CameraOnOff.Checked = false;
+        }
+
+        private void SavePhoto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CapturedPhoto.Image.Save(System.IO.Directory.GetCurrentDirectory() + "\\Photos\\" + studentRollNumber + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                CapturedPhoto.Image = null; 
+                CapturedPhoto.BackgroundImage = null;
+                MetroMessageBox.Show(this, "Successfully saved", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Error in saving QR code due to: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaveEnrollInfo_Click(object sender, EventArgs e)
+        {
+            try
+            {   //getting all the values
+                string firstName = FirstNameTextBox.Text;
+                string lastName = LastNameTextBox.Text;
+                string middleName = MiddleNameTextBox.Text;
+                string assignedCourse = CourseComboBox.Text;
+                string rollNumber = studentRollNumber;
+                string assignedTeacher = AssignTeacherTextBox.Text;
+                string contactNumber = PhoneNumberTextBox.Text;
+                string enrollmentDate = DateTime.Now.ToString("d/MM/yyyy");
+                //Serialize them into JSON
+                enrollInformationObject = new EnrollInformationObject(firstName,lastName,middleName,enrollmentDate,assignedCourse,rollNumber,assignedTeacher,contactNumber);
+               JSON_Deserialize_Serialize.EnrollInformationObjectsList.Add(enrollInformationObject);
+                Console.WriteLine("Serializing Started!");
+                JSON_Deserialize_Serialize.Serialize(JSON_Deserialize_Serialize.EnrollInformationObjectsList);
+                //Reset the values
+                FirstNameTextBox.Text = "";
+                LastNameTextBox.Text = "";
+                MiddleNameTextBox.Text = "";
+                CourseComboBox.Text = "";
+                RollNumberTextBox.Text = "";
+                AssignTeacherTextBox.Text = "";
+                PhoneNumberTextBox.Text = "";
+                QRCodePictureBox.BackgroundImage = null;
+                QRCodePictureBox.Image = null;
+                MetroMessageBox.Show(this, name + "'s record is successfully saved", "Saved Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Error saving " + name + "'s record, Reason: " + ex.Message, "Save Unsuccessfull", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -11,8 +11,9 @@ namespace AttendanceTracker
 {
     static class JSON_Deserialize_Serialize
     {
+        public static List<EnrollInformationObject> EnrollInformationObjectsList = new List<EnrollInformationObject>();
 
-        public static void Serialize(List<object> classList)
+        public static void Serialize(List<EnrollInformationObject> classList)
         {
             if (File.Exists(System.IO.Directory.GetCurrentDirectory() + "\\Saved Records\\EnrollmentRecords.json"))
             {
@@ -41,14 +42,14 @@ namespace AttendanceTracker
 
         }
 
-        public static List<object> DeSerialize(string path)
+        public static List<EnrollInformationObject> DeSerialize(string path)
         {
 
 
             try
             {
 
-                var records = JsonConvert.DeserializeObject<List<object>>(File.ReadAllText(path));
+                var records = JsonConvert.DeserializeObject<List<EnrollInformationObject>>(File.ReadAllText(path));
                 Console.WriteLine("JSON deserialized successfully");
                 return records;
 
@@ -56,7 +57,7 @@ namespace AttendanceTracker
             catch (Exception ex)
             {
                 Console.WriteLine("Deserializing failed due to : " + ex.Message);
-                return new List<object>();
+                return new List<EnrollInformationObject>();
             }
 
         }
