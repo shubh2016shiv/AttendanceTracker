@@ -12,11 +12,10 @@ namespace AttendanceTracker
 {
     public partial class DashBoard : MetroFramework.Forms.MetroForm
     {
-        VideoCapture _capture;
         public static string studentRollNumber;
         string name;
         private EnrollInformationObject enrollInformationObject;
-        
+        private OpenFolders messageBoxOpenFolder;
         public DashBoard()
         {
             InitializeComponent();
@@ -63,7 +62,7 @@ namespace AttendanceTracker
         private void EnrollStudent_Click(object sender, EventArgs e)
         {
             this.EnrollStudentPanel.Visible = true;
-            _capture = new VideoCapture();
+            Program._capture = new VideoCapture();
         }
 
         private void GenerateRollNumber_Click(object sender, EventArgs e)
@@ -105,7 +104,7 @@ namespace AttendanceTracker
         {
             this.EnrollStudentPanel.Visible = false;
             Application.Idle -= Streaming;
-            _capture = null;
+            Program._capture = null;
         }
 
         private void Streaming(object sender, System.EventArgs e)
@@ -113,7 +112,7 @@ namespace AttendanceTracker
             try
             {
                 WebcamViewer.BackgroundImageLayout = ImageLayout.Tile;
-                var img = _capture.QueryFrame().ToImage<Emgu.CV.Structure.Bgr, byte>();
+                var img = Program._capture.QueryFrame().ToImage<Emgu.CV.Structure.Bgr, byte>();
                 
                 var bmp = img.ToBitmap();
                 WebcamViewer.Image = bmp;
@@ -224,6 +223,17 @@ namespace AttendanceTracker
             {
                 MetroMessageBox.Show(this, "Error saving " + name + "'s record, Reason: " + ex.Message, "Save Unsuccessfull", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void OpenFolders_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OpenAllFoldersButton_Click(object sender, EventArgs e)
+        {
+            messageBoxOpenFolder = new OpenFolders();
+            messageBoxOpenFolder.ShowDialog();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace AttendanceTracker
 {
     static class Program
     {
+        public static Emgu.CV.VideoCapture _capture = null;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +17,7 @@ namespace AttendanceTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+            _capture = new Emgu.CV.VideoCapture(); ;
             Application.Run(new DashBoard());
             
         }
