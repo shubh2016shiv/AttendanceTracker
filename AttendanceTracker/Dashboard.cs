@@ -44,7 +44,7 @@ namespace AttendanceTracker
                 Console.WriteLine("Record file found in location: " + System.IO.Directory.GetCurrentDirectory() + "\\Saved Records");
                 Console.WriteLine("Start deserializing...");
                 List<EnrollInformationObject> savedEnrollInformationObjects = JSON_Deserialize_Serialize.DeSerialize(currentDirectory + "\\Records.json");
-                recordsGrid.DataSource = savedEnrollInformationObjects;
+                PopulateDataGrid(savedEnrollInformationObjects);
                 JSON_Deserialize_Serialize.EnrollInformationObjectsList.AddRange(savedEnrollInformationObjects);
 
             }
@@ -56,6 +56,23 @@ namespace AttendanceTracker
             
         }
 
+        private void PopulateDataGrid(List<EnrollInformationObject> savedEnrollInformationObjects)
+        {
+           foreach(EnrollInformationObject savedInfo in savedEnrollInformationObjects)
+            {
+                Object[] infoArray = new Object[recordsGrid.ColumnCount];
+
+                infoArray[0] = savedInfo.FirstName + " " + savedInfo.MiddleName + " " + savedInfo.LastName;
+                infoArray[1] = savedInfo.RollNumber;
+                infoArray[2] = savedInfo.AssignedCourse;
+                infoArray[3] = savedInfo.AssignedTeacher;
+                infoArray[4] = savedInfo.ContactNumber;
+                infoArray[5] = savedInfo.EnrollmentDate;
+
+                recordsGrid.Rows.Add(infoArray);
+
+            }
+        }
 
         private void Close_Click(object sender, EventArgs e)
         {
@@ -285,7 +302,15 @@ namespace AttendanceTracker
             //resetting photo in Photo Booth
             CapturedPhoto.Image = null;
             CapturedPhoto.BackgroundImage = null;
+
+            //refresh datagrid
+            
+                recordsGrid.Rows.Clear();
+                PopulateDataGrid(JSON_Deserialize_Serialize.EnrollInformationObjectsList);
+
+            
         }
+
         
     }
 }
