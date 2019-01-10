@@ -16,6 +16,19 @@ namespace AttendanceTracker
         public string RollNumber { get; set; }
         public string AssignedTeacher { get; set; }
         public string ContactNumber { get; set; }
+        public string fullName;
+        public string FullName
+        {
+            get
+            {
+                
+                string fullName = FirstName + " " + MiddleName + " " + LastName;
+                return fullName;
+            }
+            set { fullName = value; }
+
+
+        }
 
         public EnrollInformationObject()
         {

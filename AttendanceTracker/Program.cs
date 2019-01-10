@@ -17,7 +17,7 @@ namespace AttendanceTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            _capture = new Emgu.CV.VideoCapture(); ;
+            _capture = new Emgu.CV.VideoCapture();
             Application.Run(new DashBoard());
             
         }

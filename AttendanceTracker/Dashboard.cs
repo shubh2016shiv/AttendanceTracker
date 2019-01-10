@@ -8,6 +8,8 @@ using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AttendanceTracker
 {
@@ -17,6 +19,7 @@ namespace AttendanceTracker
         string name;
         private EnrollInformationObject enrollInformationObject;
         private OpenFolders messageBoxOpenFolder;
+        private AddCourseFrm addCourseFrm;
         public DashBoard()
         {
             InitializeComponent();
@@ -61,7 +64,7 @@ namespace AttendanceTracker
            foreach(EnrollInformationObject savedInfo in savedEnrollInformationObjects)
             {
                 Object[] infoArray = new Object[recordsGrid.ColumnCount];
-
+                
                 infoArray[0] = savedInfo.FirstName + " " + savedInfo.MiddleName + " " + savedInfo.LastName;
                 infoArray[1] = savedInfo.RollNumber;
                 infoArray[2] = savedInfo.AssignedCourse;
@@ -142,10 +145,8 @@ namespace AttendanceTracker
             {
                 if(ex is NullReferenceException)
                 {
-                    
                     Console.WriteLine("Video Streaming interrupted due to :" + ex.Message);
                     MetroMessageBox.Show(this,"Error","",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    
                 }
                 
             }
@@ -229,12 +230,7 @@ namespace AttendanceTracker
                 MetroMessageBox.Show(this, "Error saving " + name + "'s record, Reason: " + ex.Message, "Save Unsuccessfull", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void OpenFolders_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void OpenAllFoldersButton_Click(object sender, EventArgs e)
         {
             messageBoxOpenFolder = new OpenFolders();
@@ -269,20 +265,11 @@ namespace AttendanceTracker
             EnrollStudentPanel.Visible = false;
         }
 
-        private void SearchStudentTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try{
-                (recordsGrid.DataSource as DataTable).DefaultView.RowFilter = string.Format("firstname LIKE '{0}'", SearchStudentTextBox.Text);
-            }
-            catch (Exception ex)
-            {
-                if(ex is NullReferenceException) MetroMessageBox.Show(this, "There are no records available", "No Record Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
-        }
+       
         //Reseting the whole program and refresh the Data Grid
-        private void Refresh_Click(object sender, EventArgs e)
+        public void Refresh_Click(object sender, EventArgs e)
         {
+            
             //Reseting Fields in 'Enroll Students'
             FirstNameTextBox.Text = "";
             LastNameTextBox.Text = "";
@@ -305,12 +292,16 @@ namespace AttendanceTracker
 
             //refresh datagrid
             
-                recordsGrid.Rows.Clear();
-                PopulateDataGrid(JSON_Deserialize_Serialize.EnrollInformationObjectsList);
+            recordsGrid.Rows.Clear();
+            PopulateDataGrid(JSON_Deserialize_Serialize.EnrollInformationObjectsList);
 
             
         }
 
-        
+        private void AddCourseListButton_Click(object sender, EventArgs e)
+        {
+            addCourseFrm = new AddCourseFrm();
+            addCourseFrm.ShowDialog();
+        }
     }
 }
