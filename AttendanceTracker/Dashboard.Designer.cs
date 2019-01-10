@@ -54,6 +54,7 @@
             this.SearchStudentTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.EnrollStudentPanel = new MetroFramework.Controls.MetroPanel();
+            this.AddCourseListButton = new System.Windows.Forms.Button();
             this.DownloadQRCode = new System.Windows.Forms.Button();
             this.SavePhoto = new System.Windows.Forms.Button();
             this.panelOverWebcam = new MetroFramework.Controls.MetroPanel();
@@ -84,7 +85,6 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.AddCourseListButton = new System.Windows.Forms.Button();
             this.metroPanel1.SuspendLayout();
             this.DetailPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recordsGrid)).BeginInit();
@@ -429,6 +429,19 @@
             this.EnrollStudentPanel.VerticalScrollbarHighlightOnWheel = false;
             this.EnrollStudentPanel.VerticalScrollbarSize = 10;
             // 
+            // AddCourseListButton
+            // 
+            this.AddCourseListButton.BackColor = System.Drawing.Color.Transparent;
+            this.AddCourseListButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AddCourseListButton.BackgroundImage")));
+            this.AddCourseListButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.AddCourseListButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.AddCourseListButton.Location = new System.Drawing.Point(407, 347);
+            this.AddCourseListButton.Name = "AddCourseListButton";
+            this.AddCourseListButton.Size = new System.Drawing.Size(36, 30);
+            this.AddCourseListButton.TabIndex = 35;
+            this.AddCourseListButton.UseVisualStyleBackColor = false;
+            this.AddCourseListButton.Click += new System.EventHandler(this.AddCourseListButton_Click);
+            // 
             // DownloadQRCode
             // 
             this.DownloadQRCode.BackColor = System.Drawing.Color.Transparent;
@@ -578,12 +591,13 @@
             // 
             // CourseComboBox
             // 
+            this.CourseComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.CourseComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CourseComboBox.FormattingEnabled = true;
             this.CourseComboBox.Location = new System.Drawing.Point(159, 351);
             this.CourseComboBox.Name = "CourseComboBox";
             this.CourseComboBox.Size = new System.Drawing.Size(242, 24);
             this.CourseComboBox.TabIndex = 16;
-            this.CourseComboBox.Text = "Enter the keyword to search..";
             // 
             // EnrollmentDateTime
             // 
@@ -867,19 +881,6 @@
             this.metroLabel1.Size = new System.Drawing.Size(1, 613);
             this.metroLabel1.TabIndex = 2;
             // 
-            // AddCourseListButton
-            // 
-            this.AddCourseListButton.BackColor = System.Drawing.Color.Transparent;
-            this.AddCourseListButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AddCourseListButton.BackgroundImage")));
-            this.AddCourseListButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.AddCourseListButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.AddCourseListButton.Location = new System.Drawing.Point(407, 347);
-            this.AddCourseListButton.Name = "AddCourseListButton";
-            this.AddCourseListButton.Size = new System.Drawing.Size(36, 30);
-            this.AddCourseListButton.TabIndex = 35;
-            this.AddCourseListButton.UseVisualStyleBackColor = false;
-            this.AddCourseListButton.Click += new System.EventHandler(this.AddCourseListButton_Click);
-            // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -941,8 +942,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroDateTime EnrollmentDateTime;
-        private System.Windows.Forms.ComboBox CourseComboBox;
         private MetroFramework.Controls.MetroTile SaveEnrollInfo;
         private MetroFramework.Controls.MetroTile Cancel;
         private MetroFramework.Controls.MetroLabel metroLabel12;
@@ -965,6 +964,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PhoneNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn EnrollmentDate;
         private System.Windows.Forms.Button AddCourseListButton;
+        public System.Windows.Forms.ComboBox CourseComboBox;
+        private MetroFramework.Controls.MetroDateTime EnrollmentDateTime;
     }
 }
 

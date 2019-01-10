@@ -19,7 +19,10 @@ namespace AttendanceTracker
         string name;
         private EnrollInformationObject enrollInformationObject;
         private OpenFolders messageBoxOpenFolder;
-        private AddCourseFrm addCourseFrm;
+     
+       
+        public static List<string> courseList;
+
         public DashBoard()
         {
             InitializeComponent();
@@ -27,6 +30,8 @@ namespace AttendanceTracker
             IntializeWithOtherConditions();
             
         }
+
+         
 
         private void IntializeWithOtherConditions()
         {
@@ -56,7 +61,12 @@ namespace AttendanceTracker
                 Directory.CreateDirectory(System.IO.Directory.GetCurrentDirectory() + "\\Saved Records");
 
             }
+            courseList = new List<string>();
+
+           
             
+
+
         }
 
         private void PopulateDataGrid(List<EnrollInformationObject> savedEnrollInformationObjects)
@@ -86,14 +96,28 @@ namespace AttendanceTracker
         {
             this.EnrollStudentPanel.Visible = true;
             Program._capture = new VideoCapture();
+            CourseComboBox.Items.Clear();
+            if (File.Exists(System.IO.Directory.GetCurrentDirectory() + "\\Course_Data.dat"))
+            {
+                StreamReader reader = new StreamReader(System.IO.Directory.GetCurrentDirectory() + "\\Course_Data.dat");
+                string strAllFile = reader.ReadToEnd();
+                string[] coursesInDatFile = strAllFile.Split(',');
+                foreach (string courseInDatFile in coursesInDatFile)
+                {
+                    CourseComboBox.Items.Add(courseInDatFile);
+                }
+            }
+
         }
+
+        
 
         private void GenerateRollNumber_Click(object sender, EventArgs e)
         {
             try
             {
                 name = FirstNameTextBox.Text + " " + LastNameTextBox.Text;
-                studentRollNumber = CreateRollNumber(FirstNameTextBox.Text, LastNameTextBox.Text, CourseAssigned.Name);
+                studentRollNumber = CreateRollNumber(FirstNameTextBox.Text, LastNameTextBox.Text, CourseComboBox.Text);
                 QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
                 QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(studentRollNumber, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qRCodeData);
@@ -172,11 +196,19 @@ namespace AttendanceTracker
 
         private void CapturePhoto_Click(object sender, EventArgs e)
         {
-            Image image = WebcamViewer.Image;
-            Application.Idle -= Streaming;
-            panelOverWebcam.Visible = true;
-            CapturedPhoto.Image = image;
-            CameraOnOff.Checked = false;
+            if (CameraOnOff.Checked == true)
+            {
+                Image image = WebcamViewer.Image;
+                Application.Idle -= Streaming;
+                panelOverWebcam.Visible = true;
+                CapturedPhoto.Image = image;
+                CameraOnOff.Checked = false;
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "First Turn ON the camera", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void SavePhoto_Click(object sender, EventArgs e)
@@ -191,44 +223,69 @@ namespace AttendanceTracker
             }
             catch (Exception ex)
             {
-                MetroMessageBox.Show(this, "Error in saving QR code due to: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if(ex is NullReferenceException)
+                MetroMessageBox.Show(this, "Error in saving photo. Please check is camera is ON and you have clicked the photo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void SaveEnrollInfo_Click(object sender, EventArgs e)
         {
-            try
-            {   //getting all the values
-                string firstName = FirstNameTextBox.Text;
-                string lastName = LastNameTextBox.Text;
-                string middleName = MiddleNameTextBox.Text;
-                string assignedCourse = CourseComboBox.Text;
-                string rollNumber = studentRollNumber;
-                string assignedTeacher = AssignTeacherTextBox.Text;
-                string contactNumber = PhoneNumberTextBox.Text;
-                string enrollmentDate = DateTime.Now.ToString("d/MM/yyyy");
-                //Serialize them into JSON
-                enrollInformationObject = new EnrollInformationObject(firstName,lastName,middleName,enrollmentDate,assignedCourse,rollNumber,assignedTeacher,contactNumber);
-               JSON_Deserialize_Serialize.EnrollInformationObjectsList.Add(enrollInformationObject);
-                Console.WriteLine("Serializing Started!");
-                JSON_Deserialize_Serialize.Serialize(JSON_Deserialize_Serialize.EnrollInformationObjectsList);
-                //Reset the values
-                FirstNameTextBox.Text = "";
-                LastNameTextBox.Text = "";
-                MiddleNameTextBox.Text = "";
-                CourseComboBox.Text = "";
-                RollNumberTextBox.Text = "";
-                AssignTeacherTextBox.Text = "";
-                PhoneNumberTextBox.Text = "";
-                QRCodePictureBox.BackgroundImage = null;
-                QRCodePictureBox.Image = null;
-                MetroMessageBox.Show(this, name + "'s record is successfully saved", "Saved Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-            }
-            catch (Exception ex)
+
+            DialogResult dr = MetroMessageBox.Show(this,"Have you saved QR code and Photo of student?","Continue?",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
             {
-                MetroMessageBox.Show(this, "Error saving " + name + "'s record, Reason: " + ex.Message, "Save Unsuccessfull", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {   //getting all the values
+                    string firstName = FirstNameTextBox.Text;
+                    string lastName = LastNameTextBox.Text;
+                    string middleName = MiddleNameTextBox.Text;
+                    
+
+                    if(firstName.Contains(" ") || lastName.Contains(" ") || middleName.Contains(" "))
+                    {
+                       MetroMessageBox.Show(this, "First name, Last name or Middle Name contains space(s). Please re-enter information without giving spaces in any of these.", "Spaces not allowed!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        
+                    }
+                    else {
+                        string assignedCourse = CourseComboBox.Text;
+                        string rollNumber = studentRollNumber;
+                        string assignedTeacher = AssignTeacherTextBox.Text;
+                        string contactNumber = PhoneNumberTextBox.Text;
+                        string enrollmentDate = DateTime.Now.ToString("d/MM/yyyy");
+                        //Serialize them into JSON
+                        enrollInformationObject = new EnrollInformationObject(firstName, lastName, middleName, enrollmentDate, assignedCourse, rollNumber, assignedTeacher, contactNumber);
+                        JSON_Deserialize_Serialize.EnrollInformationObjectsList.Add(enrollInformationObject);
+                        Console.WriteLine("Serializing Started!");
+                        JSON_Deserialize_Serialize.Serialize(JSON_Deserialize_Serialize.EnrollInformationObjectsList);
+                        //Reset the values
+                        FirstNameTextBox.Text = "";
+                        LastNameTextBox.Text = "";
+                        MiddleNameTextBox.Text = "";
+                        CourseComboBox.Text = "";
+                        RollNumberTextBox.Text = "";
+                        AssignTeacherTextBox.Text = "";
+                        PhoneNumberTextBox.Text = "";
+                        QRCodePictureBox.BackgroundImage = null;
+                        QRCodePictureBox.Image = null;
+
+                        //Saving Course List to dat file
+                        //SaveToDatFile("Course_Data", System.IO.Directory.GetCurrentDirectory(), courseList);
+                        SaveCourseListInCSV();
+                        MetroMessageBox.Show(this, name + "'s record is successfully saved", "Saved Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+
+                    
+
+                }
+                catch (Exception ex)
+                {
+                    MetroMessageBox.Show(this, "Error saving " + name + "'s record, Reason: " + ex.Message, "Save Unsuccessfull", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
+            else return;
+           
         }
         
         private void OpenAllFoldersButton_Click(object sender, EventArgs e)
@@ -294,14 +351,58 @@ namespace AttendanceTracker
             
             recordsGrid.Rows.Clear();
             PopulateDataGrid(JSON_Deserialize_Serialize.EnrollInformationObjectsList);
-
             
         }
 
         private void AddCourseListButton_Click(object sender, EventArgs e)
         {
-            addCourseFrm = new AddCourseFrm();
-            addCourseFrm.ShowDialog();
+            string givenCourseName = CourseComboBox.Text;
+                courseList.Add(givenCourseName);
+                foreach(string course in courseList)
+                {if (!CourseComboBox.Items.Contains(course))
+                    CourseComboBox.Items.Add(course);
+                else { MetroMessageBox.Show(this, "This Course is already present in List. Please select from list instead.", "Duplicate found!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); break; }
+                }
+          
         }
+
+        //public bool SaveToDatFile(string FileName, string FilePath, List<string> CourseContents)
+        //{
+        //    bool Result = false;
+        //    try
+        //    {
+        //        FileStream myFile = File.Create(FilePath + "\\" +  FileName + ".dat");
+        //        BinaryWriter binaryfile = new BinaryWriter(myFile);
+        //        foreach(string course in CourseContents)
+        //        {
+        //            binaryfile.Write(course + "\\");
+        //        }
+                
+        //        binaryfile.Close();
+        //        myFile.Close();
+        //        Result = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //        Result = false;
+        //    }
+        //    return Result;
+        //}
+
+        public void SaveCourseListInCSV()
+        {
+            try
+            {
+                TextWriter tw = new StreamWriter(System.IO.Directory.GetCurrentDirectory() + "\\Course_Data.dat");
+                tw.WriteLine(String.Join(",", courseList));
+                tw.Close();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
     }
 }
